@@ -8,4 +8,4 @@ at
 
 ## Maps
 
-1. [Black spots at Ludhiana](maps/index)
+1. [Black spots at Ludhiana](maps/index.html)
