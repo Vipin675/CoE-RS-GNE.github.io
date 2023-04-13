@@ -1,28 +1,26 @@
-<!DOCTYPE html/>
-<html>
-  <body>
-    <div id="mapdiv"></div>
-    <script src="https://openlayers.org/api/2.13.1/OpenLayers.js"></script>
-    <script>
-      map = new OpenLayers.Map("mapdiv");
-      map.addLayer(new OpenLayers.Layer.OSM());
+<!DOCTYPE html>
+<html lang="en">
 
-      var pois = new OpenLayers.Layer.Text("Black Spots", {
-        location:
-          "textfile.txt",
-        projection: map.displayProjection,
-      });
-      map.addLayer(pois);
-      // create layer switcher widget in top right corner of map.
-      var layer_switcher = new OpenLayers.Control.LayerSwitcher({});
-      map.addControl(layer_switcher);
-      //Set start centrepoint and zoom
-      var lonLat = new OpenLayers.LonLat(75.86, 30.9).transform(
-        new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-        map.getProjectionObject() // to Spherical Mercator Projection
-      );
-      var zoom = 11;
-      map.setCenter(lonLat, zoom);
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoE-RS-GNE</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  <style>
+    #map {
+
+      height: 99vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script src="index.js"></script>
+</body>
+
 </html>
