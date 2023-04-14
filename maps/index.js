@@ -24,8 +24,8 @@ fetch('data.csv')
 
     // Define custom icon
     const customIcon = L.icon({
-      iconUrl: 'coe2.jpeg', // Specify the URL of the custom icon image
-      iconSize: [32, 32], // Specify the size of the icon
+      iconUrl: 'https://gndec.ac.in/~hsrai/maps/coe/coe2.jpeg', // Specify the URL of the custom icon image
+      iconSize: [20, 20], // Specify the size of the icon
       iconAnchor: [16, 16] // Specify the anchor point of the icon
     });
 
@@ -36,7 +36,15 @@ fetch('data.csv')
         const lat = parseFloat(jsonData[i].lat); // Convert latitude string to number
         const lon = parseFloat(jsonData[i].lon); // Convert longitude string to number
         const marker = L.marker([lat, lon], {icon: customIcon}).addTo(map); // Add marker with custom icon
-        marker.bindPopup(`<b>${jsonData[i].name}</b><br>${jsonData[i].description}`); // Add popup with data
+        marker.bindPopup(`<b>${jsonData[i].title}</b><br>${jsonData[i].description}`); // Add popup with data
+
+      // Add circle with specified radius
+      
+      L.circle([lat, lon], {        
+      color: "red",
+      fillColor: "#f03",
+      fillOpacity: 0.5,
+      radius: 100,}).addTo(map);
       }
     }
   })
