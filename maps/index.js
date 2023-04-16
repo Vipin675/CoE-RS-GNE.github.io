@@ -17,7 +17,7 @@ fetch('data.csv')
     }
 
     // Create Leaflet map
-    const map = L.map('map').setView([30.788823, 75.8498616], 13); // Set initial map view
+    const map = L.map('map').setView([30.91, 75.86], 11); // Set initial map view
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { // Add OpenStreetMap tile layer
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
