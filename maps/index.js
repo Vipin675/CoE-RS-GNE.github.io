@@ -10,18 +10,6 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // NOTE: Make sure all the code is called after the div and leaflet.js inclusion.
 
-// POPUP Lat and Lng on click on anywhere on map
-var popup = L.popup();
-
-function onMapClick(e) {
-  popup
-    .setLatLng(e.latlng)
-    .setContent("You clicked the map at " + e.latlng.toString())
-    .openOn(map);
-}
-
-map.on("click", onMapClick);
-
 // ----------------------------------------------------------------------------------------------------------------------------------
 
 fetch("./data.csv")
