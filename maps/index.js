@@ -37,7 +37,7 @@ fetch("./data.csv")
       } else if (severity_score >= 50 && severity_score < 100) {
         coe2_level = "./assets/coe2_medium.svg";
       } else if (severity_score >= 100) {
-        coe2_level = "./assets/coe3_high.svg";
+        coe2_level = "./assets/coe2_high.svg";
       }
 
       var myIcon = L.icon({
