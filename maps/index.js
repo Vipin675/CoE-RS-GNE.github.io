@@ -29,8 +29,19 @@ fetch("./data.csv")
     }));
 
     coeDataArray.map((data_item) => {
+      let severity_score = data_item.title.split(" ")[2];
+      let coe2_level;
+
+      if (severity_score < 50) {
+        coe2_level = "./assets/coe2_low.svg";
+      } else if (severity_score >= 50 && severity_score < 100) {
+        coe2_level = "./assets/coe2_medium.svg";
+      } else if (severity_score >= 100) {
+        coe2_level = "./assets/coe3_high.svg";
+      }
+
       var myIcon = L.icon({
-        iconUrl: `./${data_item.icon}`,
+        iconUrl: `./${coe2_level}`,
         iconSize: data_item.iconSize,
         iconOffset: data_item.iconOffset,
       });
