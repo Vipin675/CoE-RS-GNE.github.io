@@ -28,31 +28,58 @@ fetch("./data.csv")
       iconOffset: item[6].split(",").map((iItem) => parseFloat(iItem)),
     }));
 
+    const low_severity_group = L.layerGroup().addTo(map);
+    const medium_severity_group = L.layerGroup().addTo(map);
+    const high_severity_group = L.layerGroup().addTo(map);
+
     coeDataArray.map((data_item) => {
-      let severity_score = data_item.title.split(" ")[2];
-      let coe2_level;
-
-      if (severity_score < 50) {
-        coe2_level = "./assets/coe2_low.svg";
-      } else if (severity_score >= 50 && severity_score < 100) {
-        coe2_level = "./assets/coe2_medium.svg";
-      } else if (severity_score >= 100) {
-        coe2_level = "./assets/coe2_high.svg";
-      }
-
-      var myIcon = L.icon({
-        iconUrl: `./${coe2_level}`,
+      var low_severity_icon = L.icon({
+        iconUrl: "./assets/coe2_low.svg",
         iconSize: data_item.iconSize,
         iconOffset: data_item.iconOffset,
       });
 
-      var marker = L.marker([data_item.lat, data_item.lon], {
-        icon: myIcon,
-      })
-        .addTo(map)
-        .bindPopup(
-          `<b>${data_item.title}</b> <br/> <b>${data_item.description}</b>`
-        );
+      var medium_severity_icon = L.icon({
+        iconUrl: "./assets/coe2_medium.svg",
+        iconSize: data_item.iconSize,
+        iconOffset: data_item.iconOffset,
+      });
+
+      var high_severity_icon = L.icon({
+        iconUrl: "./assets/coe2_high.svg",
+        iconSize: data_item.iconSize,
+        iconOffset: data_item.iconOffset,
+      });
+
+      let severity_score = data_item.title.split(" ")[2];
+
+      if (severity_score < 50) {
+        L.marker([data_item.lat, data_item.lon], { icon: low_severity_icon })
+          .bindPopup(
+            `<b>${data_item.title}</b> <br/> <b>${data_item.description}</b>`
+          )
+          .addTo(low_severity_group);
+      } else if (severity_score >= 50 && severity_score < 100) {
+        L.marker([data_item.lat, data_item.lon], { icon: medium_severity_icon })
+          .bindPopup(
+            `<b>${data_item.title}</b> <br/> <b>${data_item.description}</b>`
+          )
+          .addTo(medium_severity_group);
+      } else if (severity_score >= 100) {
+        L.marker([data_item.lat, data_item.lon], { icon: high_severity_icon })
+          .bindPopup(
+            `<b>${data_item.title}</b> <br/> <b>${data_item.description}</b>`
+          )
+          .addTo(high_severity_group);
+      }
     });
+
+    const overlays = {
+      "Low Severity": low_severity_group,
+      "Medium Severity": medium_severity_group,
+      "High Severity": high_severity_group,
+    };
+
+    const layerControl = L.control.layers(null, overlays).addTo(map);
   })
   .catch((error) => console.error(error));
